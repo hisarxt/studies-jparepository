@@ -16,7 +16,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	// Mesma consulta usando somente o FrameWork
 	Page<User> findBySalaryBetween(Double minSalary, Double maxSalary, Pageable pageable);
 	
+	// Consulta por nome usando JpaSQL
 	@Query("SELECT obj FROM User obj WHERE LOWER(obj.name) LIKE LOWER(CONCAT('%',:name,'%'))")
 	Page<User> searchName(String name, Pageable pageable);
+
+	// Mesma consulta usando somente o framework
+	Page<User> findByNameContainingIgnoreCase(String name, Pageable pageable);
 
 }
